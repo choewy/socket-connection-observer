@@ -42,7 +42,7 @@ export class SocketConnection {
       });
 
       this.ws.connect();
-    }, [setSockets]);
+    }, [setSockets, setPings, setEvents]);
 
     return { sockets, pings, events };
   }
