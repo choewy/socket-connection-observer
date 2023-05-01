@@ -27,8 +27,18 @@ export class SocketConnection {
         this.ws.emit('ping');
       });
 
+      this.ws.on('connect', () => {
+        setEvents((prev) => ['connect'].concat(prev));
+      });
+
       this.ws.on('disconnect', () => {
         setEvents((prev) => ['disconnect'].concat(prev));
+
+        /** @description reload */
+        setTimeout(() => window.location.reload(), 1500);
+
+        /** @description reconnect */
+        setTimeout(() => this.ws.connect());
       });
 
       this.ws.connect();
