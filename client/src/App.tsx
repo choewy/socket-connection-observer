@@ -1,21 +1,14 @@
-import { socketConnection } from './connection';
+import { socketConnection } from './core';
+import { ConnectionList, EventLogs, PingLogs } from './components';
 
 export default function App() {
   const { sockets, events, pings } = socketConnection.useConnect();
 
   return (
     <div>
-      {sockets.map((socket) => (
-        <div>
-          {socket.id}: {socket.name}
-        </div>
-      ))}
-      {events.map((event) => (
-        <div>event: {event}</div>
-      ))}
-      {pings.map((ping) => (
-        <div>ping: {ping}</div>
-      ))}
+      <ConnectionList sockets={sockets} />
+      <EventLogs events={events} />
+      <PingLogs pings={pings} />
     </div>
   );
 }
